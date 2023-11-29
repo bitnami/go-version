@@ -1,0 +1,87 @@
+name: '[CI/CD] Go'
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'pkg/**'
+  push:
+    branches:
+      - main
+    paths:
+      - 'pkg/**'
+
+# Remove all permissions by default
+permissions: {}
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: '1.20'
+
+      - name: Get changed src code
+        id: changed-files
+        uses: tj-actions/changed-files@v35
+        with:
+          dir_names: "true"
+          dir_names_max_depth: "2"
+          files: |
+            pkg/**
+
+      - name: Test
+        if: steps.changed-files.outputs.any_changed == 'true'
+        run: |
+          for dir in ${{ steps.changed-files.outputs.all_changed_files }}; do
+            go test -v ./${dir}/...
+          done
+
+  check:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: '1.20'
+
+      - name: Get changed src code
+        id: changed-files
+        uses: tj-actions/changed-files@v35
+        with:
+          dir_names: "true"
+          dir_names_max_depth: "2"
+          files: |
+            pkg/**
+
+      - name: Format
+        if: steps.changed-files.outputs.any_changed == 'true'
+        run: |
+          exit_code=0
+          for dir in ${{ steps.changed-files.outputs.all_changed_files }}; do
+            if [ "$(gofmt -s -l ./${dir} | wc -l)" -gt 0 ]; then
+              exit_code=1
+            fi
+          done
+          exit $exit_code
+
+      - name: golangci-lint
+        uses: golangci/golangci-lint-action@v3.3.1
+        with:
+          args: "--out-${NO_FUTURE}format colored-line-number"
+          only-new-issues: true
+          skip-cache: true
+          skip-build-cache: true
+          version: latest
