@@ -1,1 +1,1 @@
-# go-bitnami-version
+# go-version
