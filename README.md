@@ -1,7 +1,7 @@
 # go-version
 
 [![Go Report Card](https://goreportcard.com/badge/github.com/bitnami/go-version)](https://goreportcard.com/report/github.com/bitnami/go-version)
-[![CI](https://github.com/bitnami/gonit/actions/workflows/go.yml/badge.svg)](https://github.com/bitnami/gonit/actions/workflows/go.yml)
+[![CI](https://github.com/bitnami/go-version/actions/workflows/go.yml/badge.svg)](https://github.com/bitnami/go-version/actions/workflows/go.yml)
 
 go-version is a library for parsing Bitnami packages versions and version constraints, and verifying versions against a set of constraints.
 
@@ -10,6 +10,7 @@ go-version is a library for parsing Bitnami packages versions and version constr
 
 - [Usage](#usage)
   - [Version parsing and comparison](#version-parsing-and-comparison)
+  - [Sorting](#sorting)
   - [Version constraints](#version-constraints)
     - [Version revision](#version-revision)
     - [Missing major/minor/patch versions](#missing-majorminorpatch-versions)
@@ -35,6 +36,22 @@ v2, _ := version.Parse("1.2.1")
 if v1.LessThan(v2) {
     fmt.Printf("%s is less than %s", v1, v2)
 }
+```
+
+### Sorting
+
+Collections of versions can be sorted using the `sort.Sort` function from the standard library.
+
+```go
+versionsRaw := []string{"1.1.0", "0.7.1", "1.4.0", "1.4.0-alpha", "1.4.1-beta", "1.4.0-alpha.2+20130313144700"}
+versions := make(version.Collection, len(versionsRaw))
+for i, raw := range versionsRaw {
+    v, _ := version.Parse(raw)
+    versions[i] = v
+}
+
+// After this, the versions are properly sorted
+sort.Sort(versions)
 ```
 
 ### Version constraints
