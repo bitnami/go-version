@@ -40,7 +40,7 @@ if v1.LessThan(v2) {
 
 ### Sorting
 
-Collections of versions can be sorted the `sort.Sort` function from the standard library.
+Collections of versions can be sorted using the `sort.Sort` function from the standard library.
 
 ```go
 versionsRaw := []string{"1.1.0", "0.7.1", "1.4.0", "1.4.0-alpha", "1.4.1-beta", "1.4.0-alpha.2+20130313144700"}
