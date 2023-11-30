@@ -1,7 +1,7 @@
 # go-version
 
 [![Go Report Card](https://goreportcard.com/badge/github.com/bitnami/go-version)](https://goreportcard.com/report/github.com/bitnami/go-version)
-[![CI](https://github.com/bitnami/gonit/actions/workflows/go.yml/badge.svg)](https://github.com/bitnami/gonit/actions/workflows/go.yml)
+[![CI](https://github.com/bitnami/go-version/actions/workflows/go.yml/badge.svg)](https://github.com/bitnami/go-version/actions/workflows/go.yml)
 
 go-version is a library for parsing Bitnami packages versions and version constraints, and verifying versions against a set of constraints.
 
@@ -51,7 +51,7 @@ for i, raw := range versionsRaw {
 }
 
 // After this, the versions are properly sorted
-sort.Sort(version.Collection(versions))
+sort.Sort(versions)
 ```
 
 ### Version constraints

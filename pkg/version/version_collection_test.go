@@ -67,7 +67,7 @@ func TestCollection(t *testing.T) {
 				versions[i] = v
 			}
 
-			sort.Sort(Collection(versions))
+			sort.Sort(versions)
 
 			got := make([]string, len(versions))
 			for i, v := range versions {
