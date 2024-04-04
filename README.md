@@ -1,9 +1,9 @@
-# go-version
-
 [![Go Report Card](https://goreportcard.com/badge/github.com/bitnami/go-version)](https://goreportcard.com/report/github.com/bitnami/go-version)
 [![CI](https://github.com/bitnami/go-version/actions/workflows/go.yml/badge.svg)](https://github.com/bitnami/go-version/actions/workflows/go.yml)
 
-go-version is a library for parsing Bitnami packages versions and version constraints, and verifying versions against a set of constraints.
+# go-version
+
+go-version is a library for parsing Bitnami package versions and version constraints and verifying versions against a set of constraints.
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
@@ -20,7 +20,7 @@ go-version is a library for parsing Bitnami packages versions and version constr
 
 ## Usage
 
-Versions used with `version` package must follow [Semantic Versioning](https://semver.org/) with a small adjustments: **pre-release versions are considered revisions** and, therefore, the bigger the revision number, the newer the version.
+Versions used with the `version` package must follow [Semantic Versioning](https://semver.org/) with small adjustments: **pre-release versions are considered revisions** and, therefore, the bigger the revision number, the newer the version.
 
 ### Version parsing and comparison
 
@@ -83,7 +83,7 @@ Supported operators:
 
 #### Version revision
 
-A revision may be denoted by appending a hyphen and a series of dot separated identifiers immediately following the patch version. Revision have a greater precedence than the associated normal version (e.g. `1.2.3-1 > 1.2.3`).
+A revision may be denoted by appending a hyphen and a series of dot separated identifiers immediately following the patch version. Revision has a greater precedence than the associated normal version (e.g. `1.2.3-1 > 1.2.3`).
 
 ```go
 v, _ := version.Parse("2.0.0")
@@ -103,7 +103,7 @@ c.Check(v) // true
 
 #### Missing major/minor/patch versions
 
-If some of major/minor/patch versions are not specified, it is treated as `*` by default. In short, `3.1.3` satisfies `= 3` because `= 3` is converted to `= 3.*.*`.
+If some of the major/minor/patch versions are not specified, it is treated as `*` by default. In short, `3.1.3` satisfies `= 3` because `= 3` is converted to `= 3.*.*`.
 
 ```go
 v, _ := version.Parse("2.3.4")
