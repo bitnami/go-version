@@ -78,7 +78,7 @@ jobs:
           exit $exit_code
 
       - name: golangci-lint
-        uses: golangci/golangci-lint-action@v6.2.0
+        uses: golangci/golangci-lint-action@v6.5.0
         with:
           args: "--out-${NO_FUTURE}format colored-line-number"
           only-new-issues: true
